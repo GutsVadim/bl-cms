@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use backend\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -67,7 +68,7 @@ AppAsset::register($this);
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="/admin/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -79,7 +80,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="admin-lte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/admin/admin-lte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 AdminLTE Design Team
@@ -91,7 +92,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="admin-lte/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/admin/admin-lte/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Developers
@@ -103,7 +104,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="admin-lte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/admin/admin-lte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Sales Department
@@ -115,7 +116,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="admin-lte/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/admin/admin-lte/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -243,13 +244,13 @@ AppAsset::register($this);
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="/admin/admin-lte/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">Alexander Pierce</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="/admin/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     Alexander Pierce - Web Developer
                                     <small>Member since Nov. 2012</small>
@@ -293,7 +294,7 @@ AppAsset::register($this);
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="/admin/admin-lte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>Alexander Pierce</p>
@@ -314,9 +315,15 @@ AppAsset::register($this);
             <ul class="sidebar-menu">
                 <li class="header">ГЛАВНОЕ МЕНЮ</li>
                 <li class="active treeview">
-                    <a href="/admin/dashboard">
+                    <a href="<?=Url::toRoute('dashboard/index')?>">
                         <i class="fa fa-dashboard"></i>
                         <span>Панель управления</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="<?=Url::toRoute('users/index')?>">
+                        <i class="fa fa-users"></i>
+                        <span>Пользователи</span>
                     </a>
                 </li>
             </ul>
@@ -329,7 +336,7 @@ AppAsset::register($this);
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
+                <?= Html::encode($this->title) ?>
                 <small>Control panel</small>
             </h1>
             <ol class="breadcrumb">
