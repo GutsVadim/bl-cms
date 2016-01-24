@@ -11,6 +11,7 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'defaultRoute' => 'dashboard',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
@@ -18,7 +19,9 @@ return [
             'baseUrl' => '/admin',
         ],
         'user' => [
+            'loginUrl' => \yii\helpers\Url::to('auth/login'),
             'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
             'enableAutoLogin' => true,
         ],
         'log' => [
@@ -44,5 +47,21 @@ return [
             'class' => 'yii\rbac\DbManager',
         ],
     ],
+    'as AccessBehavior' => [
+        'class' => 'backend\components\AccessBehavior'
+    ],
+    /*'as beforeRequest' => [
+        'class' => 'yii\filters\AccessControl',
+        'rules' => [
+            [
+                'actions' => ['login', 'error'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ],
+        ],
+    ],*/
     'params' => $params,
 ];

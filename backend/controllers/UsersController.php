@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use backend\models\form\CreateRoleForm;
+use backend\models\form\CreateUserForm;
 use common\models\User;
 use Yii;
 use yii\helpers\Url;
@@ -13,14 +14,16 @@ use yii\web\Controller;
 class UsersController extends Controller
 {
     public function actionIndex() {
-        $users = User::find()->all();
-        $createRoleFormModel = new CreateRoleForm();
+        $userList = User::find()->all();
+        $createUserFormModel = new CreateUserForm();
         $roleList = Yii::$app->authManager->getRoles();
+        $createRoleFormModel = new CreateRoleForm();
 
         return $this->render('index', [
-            'createRoleFormModel' => $createRoleFormModel,
+            'userList' => $userList,
+            'createUserFormModel' => $createUserFormModel,
             'roleList' => $roleList,
-            'users' => $users
+            'createRoleFormModel' => $createRoleFormModel,
         ]);
     }
 
@@ -31,7 +34,18 @@ class UsersController extends Controller
                 return $this->redirect(Url::toRoute('index'));
             }
         }
+        // TODO 1: role creation error
+        return $this->renderContent('role creation error');
+    }
 
-        return $this->renderContent(var_dump(Yii::$app->request->post()));
+    public function actionCreateUser() {
+        $model = new CreateUserForm();
+        if($model->load(Yii::$app->request->post())) {
+            if($model->create()) {
+                return $this->redirect(Url::toRoute('index'));
+            }
+        }
+        // TODO 2: user creation error
+        return $this->renderContent('1user creation error');
     }
 }

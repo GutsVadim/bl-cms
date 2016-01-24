@@ -42,9 +42,9 @@ AppAsset::register($this);
         <!-- Logo -->
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>A</b>ДМ</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Админ - </b>панель</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -274,7 +274,7 @@ AppAsset::register($this);
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="<?=Url::to(['auth/logout'])?>" class="btn btn-default btn-flat">Выйти</a>
                                 </div>
                             </li>
                         </ul>
@@ -314,14 +314,20 @@ AppAsset::register($this);
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">ГЛАВНОЕ МЕНЮ</li>
-                <li class="active treeview">
-                    <a href="<?=Url::toRoute('dashboard/index')?>">
+                <li class="<!--active--> treeview">
+                    <a href="<?=Url::to(['dashboard/'])?>">
                         <i class="fa fa-dashboard"></i>
                         <span>Панель управления</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="<?=Url::toRoute('users/index')?>">
+                    <a href="<?=Url::to(['articles/'])?>">
+                        <i class="fa fa-file-text"></i>
+                        <span>Статьи</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="<?=Url::to(['users/'])?>">
                         <i class="fa fa-users"></i>
                         <span>Пользователи</span>
                     </a>
