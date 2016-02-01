@@ -34,7 +34,7 @@ class UsersController extends Controller
                 return $this->redirect(Url::toRoute('index'));
             }
         }
-        // TODO 1: role creation error
+        // TODO: role creation error
         return $this->renderContent('role creation error');
     }
 
@@ -45,7 +45,7 @@ class UsersController extends Controller
                 return $this->redirect(Url::toRoute('index'));
             }
         }
-        // TODO 2: user creation error
+        // TODO: user creation error
         return $this->renderContent('1user creation error');
     }
 }
