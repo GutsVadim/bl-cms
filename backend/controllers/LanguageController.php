@@ -47,19 +47,11 @@ class LanguageController extends Controller
     }
 
     public function actionSwitchActive() {
-        $id = \Yii::$app->request->get();
-        if(!empty($id) && isset($id)) {
-            $item = Language::findOne($id);
-            if($item) {
-                $active = $item->active;
-                if ($active == 1) {
-                    $active = 0;
-                }
-                else {
-                    $active = 1;
-                }
-                $item->active = $active;
-                $item->save();
+        $id = \Yii::$app->request->get('id');
+        if(!empty($id)) {
+            if($language = Language::findOne($id)) {
+                $language->active = !$language->active;
+                $language->save();
             }
             else {
                 return $this->render('/site/error', ['message' => 'Error', 'errors' => 'Language is not found']);
