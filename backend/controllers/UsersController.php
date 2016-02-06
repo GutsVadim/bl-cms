@@ -1,11 +1,14 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\form\AddPermissionToRoleForm;
 use backend\models\form\CreateRoleForm;
 use backend\models\form\CreatePermissionForm;
 use backend\models\form\CreateUserForm;
+use backend\models\form\RemovePermissionFromRole;
 use common\models\User;
 use Yii;
+use yii\db\IntegrityException;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -22,6 +25,7 @@ class UsersController extends Controller
             'createRoleFormModel' => new CreateRoleForm(),
             'permissionList' => Yii::$app->authManager->getPermissions(),
             'createPermissionFormModel' => new CreatePermissionForm(),
+            'addPermissionToRoleFormModel' => new AddPermissionToRoleForm(),
         ]);
     }
 
@@ -56,5 +60,38 @@ class UsersController extends Controller
         }
         // TODO: user creation error
         return $this->renderContent('user creation error');
+    }
+
+    public function actionAddPermissionToRole() {
+        $model = new AddPermissionToRoleForm();
+        if($model->load(Yii::$app->request->post())) {
+            try {
+                $model->add();
+                return $this->redirect(Url::to(['index']));
+            }
+            catch(IntegrityException $ex) {
+            }
+
+        }
+        // TODO: user creation error
+        return $this->renderContent('add child error');
+    }
+
+    public function actionRemovePermissionFromRole() {
+        $model = new RemovePermissionFromRole();
+        $model->roleName = Yii::$app->request->get('roleName');
+        $model->permissionName = Yii::$app->request->get('permissionName');
+
+        if($model->validate()) {
+            try {
+                $model->remove();
+                return $this->redirect(Url::to(['index']));
+            }
+            catch(IntegrityException $ex) {
+            }
+
+        }
+        // TODO: user creation error
+        return $this->renderContent('remove child error');
     }
 }
