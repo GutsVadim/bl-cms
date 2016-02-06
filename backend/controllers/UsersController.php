@@ -11,6 +11,7 @@ use backend\models\form\RemoveRoleFromUser;
 use common\models\User;
 use Yii;
 use yii\db\IntegrityException;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -19,6 +20,23 @@ use yii\web\Controller;
  */
 class UsersController extends Controller
 {
+    /*public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create-permission'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create-permission'],
+                        'roles' => ['createPermission']
+                    ]
+                ],
+            ],
+        ];
+    }*/
+
     public function actionIndex() {
         return $this->render('index', [
             'userList' => User::find()->all(),
