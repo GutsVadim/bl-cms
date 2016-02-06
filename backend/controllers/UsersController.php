@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use backend\models\form\AddPermissionToRoleForm;
+use backend\models\form\AddRoleToUserForm;
 use backend\models\form\CreateRoleForm;
 use backend\models\form\CreatePermissionForm;
 use backend\models\form\CreateUserForm;
@@ -27,6 +28,7 @@ class UsersController extends Controller
             'permissionList' => Yii::$app->authManager->getPermissions(),
             'createPermissionFormModel' => new CreatePermissionForm(),
             'addPermissionToRoleFormModel' => new AddPermissionToRoleForm(),
+            'addRoleToUserFormModel' => new AddRoleToUserForm(),
         ]);
     }
 
@@ -34,15 +36,15 @@ class UsersController extends Controller
         $model = new CreateUserForm();
         if($model->load(Yii::$app->request->post())) {
             if($model->create()) {
-                return $this->redirect(Url::toRoute('index'));
+                return $this->redirect(Url::to(['index']));
             }
         }
-        // TODO: user creation error
+        // TODO: error
         return $this->renderContent('user creation error');
     }
 
     public function actionAddRoleToUser() {
-        $model = new AddPermissionToRoleForm();
+        $model = new AddRoleToUserForm();
         if($model->load(Yii::$app->request->post())) {
             try {
                 $model->add();
@@ -52,7 +54,7 @@ class UsersController extends Controller
             }
 
         }
-        // TODO: user creation error
+        // TODO: error
         return $this->renderContent('add child error');
     }
 
@@ -70,7 +72,7 @@ class UsersController extends Controller
             }
 
         }
-        // TODO: user creation error
+        // TODO: error
         return $this->renderContent('remove child error');
     }
 
@@ -78,10 +80,10 @@ class UsersController extends Controller
         $model = new CreateRoleForm();
         if($model->load(Yii::$app->request->post())) {
             if($model->create()) {
-                return $this->redirect(Url::toRoute('index'));
+                return $this->redirect(Url::to(['index']));
             }
         }
-        // TODO: role creation error
+        // TODO: error
         return $this->renderContent('role creation error');
     }
 
@@ -92,7 +94,7 @@ class UsersController extends Controller
                 return $this->redirect(Url::to(['index']));
             }
         }
-        // TODO: role creation error
+        // TODO: error
         return $this->renderContent('permission creation error');
     }
 
@@ -107,7 +109,7 @@ class UsersController extends Controller
             }
 
         }
-        // TODO: user creation error
+        // TODO: error
         return $this->renderContent('add child error');
     }
 
@@ -125,7 +127,7 @@ class UsersController extends Controller
             }
 
         }
-        // TODO: user creation error
+        // TODO: error
         return $this->renderContent('remove child error');
     }
 }

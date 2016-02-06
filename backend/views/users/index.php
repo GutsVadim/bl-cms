@@ -7,6 +7,7 @@
 /* @var $createPermissionFormModel \backend\models\form\CreatePermissionForm */
 /* @var $permissionList \yii\rbac\Permission[] */
 /* @var $addPermissionToRoleFormModel \backend\models\form\AddPermissionToRoleForm */
+/* @var $addRoleToUserFormModel \backend\models\form\AddRoleToUserForm */
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -32,7 +33,13 @@ $this->title = "Пользователи";
                         <tr>
                             <th>Имя пользователя</th>
                             <th>Адрес электронной почты</th>
-                            <th>Роли</th>
+                            <th>
+                                Роли
+                                <a href="" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#addRoleToUserFormModel">
+                                    <i class="fa fa-plus"></i>
+                                    Добавить связь
+                                </a>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -293,7 +300,7 @@ $this->title = "Пользователи";
 <div class="modal fade" id="addPermissionToRoleFormModel" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <? $createPermissionForm = ActiveForm::begin(['action' => Url::to(['add-permission-to-role'])]) ?>
+            <? ActiveForm::begin(['action' => Url::to(['add-permission-to-role'])]) ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -308,6 +315,36 @@ $this->title = "Пользователи";
                     <div class="form-group">
                         <?= Html::activeDropDownList($addPermissionToRoleFormModel, 'permissionName',
                             ArrayHelper::map($permissionList, 'name', 'name')) ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary pull-right" value="Добавить">
+                </div>
+            <? ActiveForm::end(); ?>
+        </div>
+    </div>
+</div>
+
+<!-- Add Permission to Role Modal Dialog -->
+<div class="modal fade" id="addRoleToUserFormModel" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <? ActiveForm::begin(['action' => Url::to(['add-role-to-user'])]) ?>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Добавить роль к пользователю</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?= Html::activeDropDownList($addRoleToUserFormModel, 'userId',
+                            ArrayHelper::map(\common\models\User::find()->all(), 'id', 'username')) ?>
+                    </div>
+                    <div class="form-group">
+                        <?= Html::activeDropDownList($addRoleToUserFormModel, 'roleName',
+                            ArrayHelper::map($roleList, 'name', 'description')) ?>
                     </div>
                 </div>
                 <div class="modal-footer">
