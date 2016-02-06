@@ -35,7 +35,7 @@ $this->title = "Пользователи";
                             <th>Адрес электронной почты</th>
                             <th>
                                 Роли
-                                <a href="" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#addRoleToUserFormModel">
+                                <a href="" class="btn btn-xs btn-success pull-right" data-toggle="modal" data-target="#addRoleToUserFormModel">
                                     <i class="fa fa-plus"></i>
                                     Добавить связь
                                 </a>
@@ -89,7 +89,7 @@ $this->title = "Пользователи";
                         <th>Описание</th>
                         <th>
                             Разрешения
-                            <a href="" class="btn btn-success pull-right" data-toggle="modal" data-target="#addPermissionToRoleFormModel">
+                            <a href="" class="btn btn-xs btn-success pull-right" data-toggle="modal" data-target="#addPermissionToRoleFormModel">
                                 <i class="fa fa-plus"></i>
                                 Добавить связь
                             </a>
