@@ -4,6 +4,8 @@
 /* @var $userList \common\models\User[] */
 /* @var $createRoleFormModel \backend\models\form\CreateRoleForm */
 /* @var $roleList \yii\rbac\Role[] */
+/* @var $createPermissionFormModel \backend\models\form\CreatePermissionForm */
+/* @var $permissionList \yii\rbac\Permission[] */
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -16,15 +18,15 @@ $this->title = "Пользователи";
 <div class="row">
 
     <!-- Users -->
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-user"></i>
                     Список пользователей
                 </h3>
             </div>
-            <div class="box-body no-padding">
-                <table class="table">
+            <div class="box-body">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Имя пользователя</th>
@@ -57,19 +59,20 @@ $this->title = "Пользователи";
     </div>
 
     <!-- Roles -->
-    <div class="col-md-4">
+    <div class="col-md-12">
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-users"></i>
                     Список ролей
                 </h3>
             </div>
-            <div class="box-body no-padding">
-                <table class="table">
+            <div class="box-body">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Название</th>
                         <th>Описание</th>
+                        <th>Разрешения</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,6 +80,9 @@ $this->title = "Пользователи";
                         <tr>
                             <td><?= $role->name ?></td>
                             <td><?= $role->description ?></td>
+                            <td>
+                                <!--<a href="<?/*=Url::to([''])*/?>"></a>-->
+                            </td>
                         </tr>
                     <? } ?>
                     </tbody>
@@ -84,6 +90,40 @@ $this->title = "Пользователи";
             </div>
             <div class="box-footer">
                 <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#createRoleFormModel">
+                    <i class="fa fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Permissions -->
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-users"></i>
+                    Список разрешений
+                </h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Описание</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <? foreach ($permissionList as $permission) { ?>
+                        <tr>
+                            <td><?= $permission->name ?></td>
+                            <td><?= $permission->description ?></td>
+                        </tr>
+                    <? } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+                <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#createPermissionFormModel">
                     <i class="fa fa-plus"></i> Добавить
                 </a>
             </div>
@@ -169,6 +209,46 @@ $this->title = "Пользователи";
                     </div>
                     <div class="form-group">
                         <?= $createRoleForm->field($createRoleFormModel, 'description', [
+                            'inputOptions' => [
+                                'placeholder' => "Описание",
+                                'class' => 'form-control'
+                            ]
+                        ])->label('Описание')
+                        ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary pull-right" value="Добавить">
+                </div>
+            <? ActiveForm::end(); ?>
+        </div>
+    </div>
+</div>
+
+<!-- Create Permission Modal Dialog -->
+<div class="modal fade" id="createPermissionFormModel" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <? $createPermissionForm = ActiveForm::begin(['action' => Url::to(['create-permission'])]) ?>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Добавить разрешение</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <?= $createPermissionForm->field($createPermissionFormModel, 'name', [
+                            'inputOptions' => [
+                                'placeholder' => "Название",
+                                'class' => 'form-control'
+                            ]
+                        ])->label('Название')
+                        ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $createPermissionForm->field($createPermissionFormModel, 'description', [
                             'inputOptions' => [
                                 'placeholder' => "Описание",
                                 'class' => 'form-control'
