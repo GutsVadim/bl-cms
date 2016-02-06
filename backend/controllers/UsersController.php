@@ -6,6 +6,7 @@ use backend\models\form\CreateRoleForm;
 use backend\models\form\CreatePermissionForm;
 use backend\models\form\CreateUserForm;
 use backend\models\form\RemovePermissionFromRole;
+use backend\models\form\RemoveRoleFromUser;
 use common\models\User;
 use Yii;
 use yii\db\IntegrityException;
@@ -29,6 +30,50 @@ class UsersController extends Controller
         ]);
     }
 
+    public function actionCreateUser() {
+        $model = new CreateUserForm();
+        if($model->load(Yii::$app->request->post())) {
+            if($model->create()) {
+                return $this->redirect(Url::toRoute('index'));
+            }
+        }
+        // TODO: user creation error
+        return $this->renderContent('user creation error');
+    }
+
+    public function actionAddRoleToUser() {
+        $model = new AddPermissionToRoleForm();
+        if($model->load(Yii::$app->request->post())) {
+            try {
+                $model->add();
+                return $this->redirect(Url::to(['index']));
+            }
+            catch(IntegrityException $ex) {
+            }
+
+        }
+        // TODO: user creation error
+        return $this->renderContent('add child error');
+    }
+
+    public function actionRemoveRoleFromUser() {
+        $model = new RemoveRoleFromUser();
+        $model->roleName = Yii::$app->request->get('roleName');
+        $model->userId = Yii::$app->request->get('userId');
+
+        if($model->validate()) {
+            try {
+                $model->remove();
+                return $this->redirect(Url::to(['index']));
+            }
+            catch(IntegrityException $ex) {
+            }
+
+        }
+        // TODO: user creation error
+        return $this->renderContent('remove child error');
+    }
+
     public function actionCreateRole() {
         $model = new CreateRoleForm();
         if($model->load(Yii::$app->request->post())) {
@@ -49,17 +94,6 @@ class UsersController extends Controller
         }
         // TODO: role creation error
         return $this->renderContent('permission creation error');
-    }
-
-    public function actionCreateUser() {
-        $model = new CreateUserForm();
-        if($model->load(Yii::$app->request->post())) {
-            if($model->create()) {
-                return $this->redirect(Url::toRoute('index'));
-            }
-        }
-        // TODO: user creation error
-        return $this->renderContent('user creation error');
     }
 
     public function actionAddPermissionToRole() {

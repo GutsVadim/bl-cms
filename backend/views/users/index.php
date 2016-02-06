@@ -42,9 +42,16 @@ $this->title = "Пользователи";
                                 <td><?= $user->username ?></td>
                                 <td><?= $user->email ?></td>
                                 <td>
-                                    <? foreach($userRoles as $role) {
-                                        echo $role->description . '; ';
-                                    } ?>
+                                    <? foreach($userRoles as $role) { ?>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-xs btn-info">
+                                                <?=$role->description?>
+                                            </button>
+                                            <a href="<?=Url::to(['remove-role-from-user', 'userId' => $user->id, 'roleName' => $role->name])?>" type="button" class="btn btn-xs btn-info">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    <? } ?>
                                 </td>
                             </tr>
                         <? } ?>
