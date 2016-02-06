@@ -54,7 +54,10 @@ class LanguageController extends Controller
                 $language->save();
             }
             else {
-                return $this->render('/site/error', ['message' => 'Error', 'errors' => 'Language is not found']);
+                return $this->render('/site/error', [
+                    'message' => 'Error',
+                    'errors' => 'Language is not found'
+                ]);
             }
         }
         $this->redirect(['/settings']);
