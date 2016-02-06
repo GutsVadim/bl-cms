@@ -36,18 +36,22 @@ $this->title = 'Настройки';
                                 <td><?= $lang->name ?></td>
                                 <td><?= $lang->lang_id ?></td>
                                 <td class="text-center">
-                                    <? if ($lang->active > 0) { ?>
-                                        <i class="fa fa-check text-success"></i>
-                                    <? } else { ?>
-                                        <i class="fa fa-minus text-danger"></i>
-                                    <? } ?>
+                                    <a href="<?= Url::to(['language/switch-active', 'id' => $lang->id]) ?>">
+                                        <? if ($lang->active > 0) { ?>
+                                            <i class="fa fa-check text-success"></i>
+                                        <? } else { ?>
+                                            <i class="fa fa-minus text-danger"></i>
+                                        <? } ?>
+                                    </a>
                                 </td>
                                 <td class="text-center">
-                                    <? if ($lang->show > 0) { ?>
-                                        <i class="fa fa-check text-success"></i>
-                                    <? } else { ?>
-                                        <i class="fa fa-minus text-danger"></i>
-                                    <? } ?>
+                                    <a href="<?= Url::to(['language/switch-show', 'id' => $lang->id]) ?>">
+                                        <? if ($lang->show > 0) { ?>
+                                            <i class="fa fa-check text-success"></i>
+                                        <? } else { ?>
+                                            <i class="fa fa-minus text-danger"></i>
+                                        <? } ?>
+                                    </a>
                                 </td>
                                 <td class="text-center">
                                     <a href="<?=Url::to(['language/delete', 'id' => $lang->id])?>" class="fa fa-times text-danger"></a>

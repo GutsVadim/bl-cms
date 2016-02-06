@@ -8,9 +8,9 @@ $config = [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=bl_cms_db',
-            'username' => 'root',
-            'password' => 'GvSk1{@CYussHfm',
+            'dsn' => 'mysql:host=localhost;dbname=worldtop_bl_cms',
+            'username' => 'worldtop_bl_cms',
+            'password' => 'R6rfFhr@',
             'charset' => 'utf8',
         ],
     ],

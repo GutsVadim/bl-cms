@@ -45,4 +45,36 @@ class LanguageController extends Controller
             ]);
         }
     }
+
+    public function actionSwitchActive() {
+        $id = \Yii::$app->request->get();
+        if(!empty($id) && isset($id)) {
+            $item = Language::findOne($id);
+            $active = $item->active;
+            if($active == 1) {
+                $active = 0;
+            } else {
+                $active = 1;
+            }
+            $item->active = $active;
+            $item->save();
+        }
+        $this->redirect(['/settings']);
+    }
+
+    public function actionSwitchShow() {
+        $id = \Yii::$app->request->get();
+        if(!empty($id) && isset($id)) {
+            $item = Language::findOne($id);
+            $show = $item->show;
+            if($show == 1) {
+                $show = 0;
+            } else {
+                $show = 1;
+            }
+            $item->show = $show;
+            $item->save();
+        }
+        $this->redirect(['/settings']);
+    }
 }

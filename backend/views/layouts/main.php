@@ -356,6 +356,12 @@ AppAsset::register($this);
                             <span>Пользователи</span>
                         </a>
                     </li>
+                    <li class="treeview">
+                        <a href="<?= Url::to(['settings/']) ?>">
+                            <i class="fa fa-gears"></i>
+                            <span>Настройки</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
