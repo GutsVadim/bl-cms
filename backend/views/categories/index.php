@@ -65,7 +65,7 @@ $this->title = 'Категории';
 
             </div>
             <div class="box-footer">
-                <a class="btn btn-primary pull-right" href="<?= Url::to(['categories/create']) ?>">
+                <a class="btn btn-primary pull-right" href="<?= Url::to(['categories/create', 'translation' => 'English']) ?>">
                     <i class="fa fa-user-plus"></i> Добавить
                 </a>
             </div>

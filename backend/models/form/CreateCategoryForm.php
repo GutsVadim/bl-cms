@@ -4,6 +4,7 @@ namespace backend\models\form;
 
 use common\entities\Category;
 use common\entities\CategoryTranslation;
+use common\entities\Language;
 use yii\base\InvalidParamException;
 use yii\base\Model;
 use RuntimeException;
@@ -18,7 +19,6 @@ class CreateCategoryForm extends Model
     public function rules() {
         return [
             ['parent_id','filter', 'filter' => 'trim'],
-            ['parent_id', 'required'],
 
             ['title', 'filter', 'filter' => 'trim'],
             ['title', 'required'],
@@ -33,9 +33,9 @@ class CreateCategoryForm extends Model
             $category->parent_id = $this->parent_id;
 
             if($category->save()) {
-                $category_id = Yii::$app->db->getLastInsertID();
-                $category_translation->category_id = $category_id;
+                $category_translation->category_id = $category->id;
                 $category_translation->title = $this->title;
+                $category_translation->language_id = Language::find()->where(['name' => 'English'])->one()->id;
                 if($category_translation->save()) {
                     return true;
                 }

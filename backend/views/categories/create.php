@@ -58,6 +58,8 @@ $this->title = 'Категории';
                         ?>
                     </div>
 
+                    <input type="hidden" name="translation" value="<?= Yii::$app->request->get('translation') ?>">
+
                     <div class="form-group">
                         <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary pull-right']) ?>
                     </div>
