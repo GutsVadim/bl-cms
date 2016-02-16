@@ -345,10 +345,25 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="<?= Url::to(['articles/']) ?>">
+                        <a>
                             <i class="fa fa-file-text"></i>
-                            <span>Статьи</span>
+                            <span>Материалы</span>
+                            <i class="fa fa-angle-left pull-right"></i>
                         </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="<?= Url::to(['categories/']) ?>">
+                                    <i class="fa fa-circle-o"></i>
+                                    Категории
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= Url::to(['articles/']) ?>">
+                                    <i class="fa fa-circle-o"></i>
+                                    Статьи
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="<?= Url::to(['users/']) ?>">

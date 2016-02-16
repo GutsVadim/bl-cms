@@ -204,7 +204,11 @@ $this->title = "Пользователи";
                     </div>
                     <div class="form-group">
                         <?= Html::activeDropDownList($createUserFormModel, 'roleName',
-                            ArrayHelper::map($roleList, 'name', 'description')) ?>
+                            ArrayHelper::map($roleList, 'name', 'description'),
+                            [
+                                'class' => 'form-control'
+                            ])
+                        ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -340,11 +344,17 @@ $this->title = "Пользователи";
                 <div class="modal-body">
                     <div class="form-group">
                         <?= Html::activeDropDownList($addRoleToUserFormModel, 'userId',
-                            ArrayHelper::map(\common\models\User::find()->all(), 'id', 'username')) ?>
+                            ArrayHelper::map(\common\models\User::find()->all(), 'id', 'username'),
+                            [
+                                'class' => 'form-control'
+                            ]) ?>
                     </div>
                     <div class="form-group">
                         <?= Html::activeDropDownList($addRoleToUserFormModel, 'roleName',
-                            ArrayHelper::map($roleList, 'name', 'description')) ?>
+                            ArrayHelper::map($roleList, 'name', 'description'),
+                            [
+                                'class' => 'form-control'
+                            ]) ?>
                     </div>
                 </div>
                 <div class="modal-footer">
