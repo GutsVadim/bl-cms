@@ -204,8 +204,7 @@ $this->title = "Пользователи";
                     </div>
                     <div class="form-group">
                         <?= Html::activeDropDownList($createUserFormModel, 'roleName',
-                            ArrayHelper::map($roleList, 'name', 'description'),
-                            [
+                            ArrayHelper::map($roleList, 'name', 'description'), [
                                 'class' => 'form-control'
                             ])
                         ?>
